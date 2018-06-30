@@ -4,12 +4,12 @@
     "Parameters": {
       "VpcId": {
           "Description": "Vpc Id for this stack",
-          "Type": "String",
+          "Type": "AWS::EC2::VPC::Id",
           "Default": ""
       },
       "SubnetId": {
           "Description": "Subnet Id for this stack",
-          "Type": "String",
+          "Type": "AWS::EC2::Subnet::Id",
           "Default": ""
       },
       "Keypair": {
@@ -24,7 +24,7 @@
           "Properties": {
               "KeyName": { "Ref": "Keypair" },
               "DisableApiTermination": "false",
-              "ImageId": { "ami-5253c32d" },
+              "ImageId": "ami-5253c32d",
               "InstanceType": "t2.micro",
               "SecurityGroupIds" : [ { "Ref": "EC2JenkinsSecurityGroup" }],
               "IamInstanceProfile": { "Ref": "EC2InstanceProfile" },
@@ -109,7 +109,7 @@
          "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
          "Properties": {
             "CrossZone": "false",
-            "SecurityGroup": [ { "Ref": "ElbSecurityGroup" }],
+            "SecurityGroups": [ { "Ref": "ElbSecurityGroup" }],
             "Listeners" : [
               {
                 "LoadBalancerPort": "80",
@@ -117,8 +117,8 @@
                 "Protocol": "http"
               }
             ],
-            "Instance": { "Ref": "EC2Jenkins" },
-            "SubnetId": { "Ref": "SubnetId" },
+            "Instances": [{ "Ref": "EC2Jenkins" }],
+            "Subnets": [{ "Ref": "SubnetId" }],
             "Tags": [
                   {
                     "Key": "Name",
