@@ -36,3 +36,6 @@ RUN curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-co
     chmod +x /usr/local/bin/docker-compose
 
 USER jenkins
+
+COPY plugins.txt /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
