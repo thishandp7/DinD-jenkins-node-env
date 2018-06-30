@@ -7,7 +7,7 @@ USER root
 #497 is the gid for ECS instances
 ARG DOCKER_GID=497
 
-RUN groupadd -g ${DOCKER_GID:-999} docker
+RUN groupadd -g ${DOCKER_GID:-497} docker
 
 RUN apt-get -y update && \
     curl -sL https://deb.nodesource.com/setup_8.x | bash && \

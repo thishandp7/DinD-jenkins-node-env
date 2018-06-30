@@ -1,0 +1,17 @@
+version: "3.5"
+
+services:
+  jenkins:
+    build:
+      context: .
+      args:
+        DOCKER_GID: ${DOCKER_GID}
+    volumes:
+      - jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080
+
+volumes:
+  jenkins_home:
+    external: true
