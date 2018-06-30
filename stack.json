@@ -28,6 +28,7 @@
               "KeyName": { "Ref": "Keypair" },
               "SecurityGroupIds" : [ { "Ref": "EC2JenkinsSecurityGroup" }],
               "IamInstanceProfile": { "Ref": "EC2InstanceProfile" },
+              "SubnetId": { "Ref": "SubnetId" },
               "UserData": {
                   "Fn::Base64": {
                       "Fn::Join": [
